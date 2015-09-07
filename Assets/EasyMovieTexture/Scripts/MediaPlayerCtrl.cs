@@ -1529,4 +1529,8 @@ public class MediaPlayerCtrl : MonoBehaviour {
 		}
 		
 	}
+
+	public void StopVideo(){
+		m_CurrentState = MEDIAPLAYER_STATE.END;
+	}
 }

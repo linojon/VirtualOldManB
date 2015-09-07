@@ -9,6 +9,8 @@ public class ClickToWalk : MonoBehaviour {
 	public Transform myCam;
 	public Transform head;
 
+	public GameObject ParticleEffect;
+
 	public EventSystem EventSystemManager;
 
 	//This is used for the Look To Walk system
@@ -37,6 +39,9 @@ public class ClickToWalk : MonoBehaviour {
 				if (hit.transform.tag == "Terrain") {
 					StopAllCoroutines ();
 					StartCoroutine (MoveTo (hit.point));
+					if(ParticleEffect !=null){
+						Instantiate(ParticleEffect,hit.point,Quaternion.Euler(Vector3.zero));
+					}
 				} else {
 					if (!EventSystemManager.IsPointerOverGameObject ()) {
 						// This triggers the more simple walk forward

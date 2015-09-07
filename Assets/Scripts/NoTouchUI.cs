@@ -30,10 +30,11 @@ public class NoTouchUI : MonoBehaviour {
 		if (EventSystemManager.IsPointerOverGameObject ()) {
 			loader.SetActive (true);
 			fillAmount = fillAmount+ Time.deltaTime/2;
+			loader.GetComponent<Image>().fillAmount = fillAmount;
 			
 		
 		if(fillAmount >= 1){
-			//	gazeInput.CodeTrigger();
+				gazeInput.CodeTrigger();
 				fillAmount = 0;
 			}
 

@@ -19,7 +19,7 @@
 //   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //   THE SOFTWARE.
-
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -181,4 +181,14 @@ public class GazeInputModule : BaseInputModule {
     pointerData.clickCount = 1;
     pointerData.clickTime = Time.unscaledTime;
   }
+ 	public void CodeTrigger(){
+		var go = pointerData.pointerCurrentRaycast.gameObject;
+		if(go.GetComponent<Button>()){
+			ExecuteEvents.ExecuteHierarchy(go, pointerData, ExecuteEvents.pointerClickHandler);
+		}else{
+			GameObject ParentButton = go.GetComponentInParent<Transform>().gameObject;
+			ExecuteEvents.ExecuteHierarchy(ParentButton, pointerData, ExecuteEvents.pointerClickHandler);
+
+		}
+	}
 }

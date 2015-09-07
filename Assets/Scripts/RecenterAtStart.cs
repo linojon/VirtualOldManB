@@ -7,6 +7,8 @@ public class RecenterAtStart : MonoBehaviour {
 	public float movieTime;
 	public string sceneName;
 	public GameObject LoadingText;
+	public GameObject[] OtherObjects;
+	public MediaPlayerCtrl videoSettings;
 
 	AsyncOperation async;
 
@@ -32,12 +34,18 @@ public class RecenterAtStart : MonoBehaviour {
 		StartCoroutine (Fade ());
 	}
 	IEnumerator Fade(){
-		
+		videoSettings.Stop();
+		videoSettings.UnLoad ();
+		videoSettings.gameObject.SetActive (false);
+
+		foreach(GameObject obj in OtherObjects){
+			obj.SetActive(false);
+		}
 		while (LoadingText.GetComponent<CanvasGroup> ().alpha!=1) {
-			LoadingText.GetComponent<CanvasGroup> ().alpha = LoadingText.GetComponent<CanvasGroup> ().alpha + Time.deltaTime/2;
+			LoadingText.GetComponent<CanvasGroup> ().alpha = LoadingText.GetComponent<CanvasGroup> ().alpha + Time.deltaTime / 2;
 			yield return null;
 		}
-		if (LoadingText.GetComponent<CanvasGroup> ().alpha == 1)
-			async.allowSceneActivation = true;
+
+		async.allowSceneActivation = true;
 	}
 }

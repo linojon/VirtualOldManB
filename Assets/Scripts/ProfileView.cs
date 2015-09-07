@@ -8,11 +8,12 @@ public class ProfileView : MonoBehaviour {
 	public static GameObject currentProfile;
 	public static bool tipOn = true;
 	public static bool Alwayson;
+	public GameObject pointer;
+
 
 void Update(){
 
 		if (Alwayson != true) {
-		
 			Distance = Vector3.Distance (transform.position, Camera.main.transform.position);
 			if (Distance <= 2.2f) {
 				ProfileView.currentProfile = gameObject;
@@ -22,13 +23,17 @@ void Update(){
 			}
 			if (ProfileView.tipOn == true)
 			if (Distance < 5 && Distance > 2.2f) {
-				if (instructions != null)
+				if (instructions != null){
 					instructions.SetActive (true);	
+					pointer.SetActive(true);
+				}
 			
 			} 
 			if (ProfileView.tipOn == false) {
-				if (instructions != null)
+				if (instructions != null){
 					instructions.SetActive (false);	
+					pointer.SetActive(false);
+				}
 			}
 	
 
